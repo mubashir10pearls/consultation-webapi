@@ -1,0 +1,38 @@
+# ── Build output ─────────────────────────────────────────────────────────────
+[Bb]in/
+[Oo]bj/
+
+# ── Visual Studio / Rider ────────────────────────────────────────────────────
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.DotSettings.user
+.idea/
+
+# ── NuGet ────────────────────────────────────────────────────────────────────
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+!packages.lock.json
+
+# ── Publish / deploy output ───────────────────────────────────────────────────
+**/publish/
+**/PublishProfiles/
+artifacts/
+
+# ── Secrets — keep appsettings.json but protect local overrides ───────────────
+appsettings.Local.json
+**/secrets.json
+
+# ── OS ───────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Misc ─────────────────────────────────────────────────────────────────────
+*.log
+*.tmp
+*.swp
