@@ -71,7 +71,8 @@ Replace `Server=.` with your SQL Server instance name if different (e.g. `Server
 cd ClinicConsultation.Api
 dotnet ef database update
 ```
-
+OR Run the following commend on Solution Terminal.
+``` dotnet ef database update --project ClinicConsultation.Infrastructure --startup-project ClinicConsultation.Api ```
 This creates the `ClinicConsultationDb` database with all 5 tables.
 
 ### 3 — Run the API
