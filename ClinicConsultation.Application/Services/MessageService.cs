@@ -2,7 +2,6 @@ using ClinicConsultation.Application.DTOs;
 using ClinicConsultation.Application.Exceptions;
 using ClinicConsultation.Application.Interfaces;
 using ClinicConsultation.Domain.Entities;
-using ClinicConsultation.Domain.Enums;
 using Microsoft.Extensions.Logging;
 
 namespace ClinicConsultation.Application.Services

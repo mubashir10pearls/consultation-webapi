@@ -24,9 +24,7 @@ public class MessagesController : ControllerBase
 
     [HttpPost]
     public async Task<IActionResult> AddMessage(Guid consultationId, [FromBody] CreateMessageDto dto)
-    {
-        // NotFoundException for unknown consultation → 404 via GlobalExceptionMiddleware
-        // Inline try/catch removed — all exception handling is centralised in middleware
+    {        
         var result = await _service.AddMessageAsync(consultationId, dto);
         return Ok(result);
     }

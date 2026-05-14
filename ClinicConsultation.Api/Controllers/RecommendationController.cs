@@ -16,9 +16,7 @@ public class RecommendationController : ControllerBase
 
     [HttpPost("{consultationId:guid}/generate")]
     public async Task<IActionResult> Generate(Guid consultationId)
-    {
-        // NotFoundException for unknown consultation → 404 via GlobalExceptionMiddleware
-        // Inline try/catch removed — all exception handling is centralised in middleware
+    {        
         var result = await _service.GenerateAsync(consultationId);
         return Ok(result);
     }

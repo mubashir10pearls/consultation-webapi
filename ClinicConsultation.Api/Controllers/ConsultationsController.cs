@@ -21,12 +21,10 @@ public class ConsultationsController : ControllerBase
         var data = await _service.GetAllAsync();
         return Ok(data);
     }
-
-    // Added: GET /api/consultations/{id}
+    
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
-    {
-        // NotFoundException → 404 via GlobalExceptionMiddleware
+    {       
         var consultation = await _service.GetByIdAsync(id);
         return Ok(consultation);
     }
@@ -37,12 +35,10 @@ public class ConsultationsController : ControllerBase
         var result = await _service.CreateAsync(dto);
         return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
     }
-
-    // Added: PATCH /api/consultations/{id}/status
+    
     [HttpPatch("{id:guid}/status")]
     public async Task<IActionResult> UpdateStatus(Guid id, [FromBody] UpdateConsultationStatusDto dto)
-    {
-        // NotFoundException → 404 via GlobalExceptionMiddleware
+    {        
         await _service.UpdateStatusAsync(id, dto);
         return NoContent();
     }

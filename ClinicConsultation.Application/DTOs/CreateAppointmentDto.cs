@@ -10,9 +10,7 @@ namespace ClinicConsultation.Application.DTOs
         [Required(ErrorMessage = "Treatment is required.")]
         [MaxLength(200, ErrorMessage = "Treatment name cannot exceed 200 characters.")]
         public string Treatment { get; set; } = string.Empty;
-
-        // Changed from string to DateTime — ASP.NET Core model binding handles ISO 8601,
-        // eliminating the unsafe DateTime.Parse() call that was in AppointmentService.
+       
         [Required(ErrorMessage = "Appointment date is required.")]
         public DateTime AppointmentDate { get; set; }
 

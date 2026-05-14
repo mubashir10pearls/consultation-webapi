@@ -1,5 +1,4 @@
 using ClinicConsultation.Application.DTOs;
-using ClinicConsultation.Application.Exceptions;
 using ClinicConsultation.Application.Interfaces;
 using ClinicConsultation.Domain.Entities;
 using Microsoft.Extensions.Logging;
@@ -26,8 +25,7 @@ namespace ClinicConsultation.Application.Services
         }
 
         public async Task<AppointmentDto> CreateAsync(CreateAppointmentDto dto)
-        {
-            // AppointmentDate is now DateTime (not string) — DateTime.Parse() removed entirely
+        {           
             var appointment = new Appointment
             {
                 ConsultationId = dto.ConsultationId,

@@ -30,6 +30,14 @@ namespace ClinicConsultation.Application.Services
             var consultation = await _recommendationRepository.GetConsultationWithMessagesAsync(consultationId)
                 ?? throw new NotFoundException(nameof(Consultation), consultationId);
 
+            // Return existing recommendation if already generated — prevents duplicate key crash
+            var existing = await _recommendationRepository.GetByConsultationIdAsync(consultationId);
+            if (existing != null)
+            {
+                _logger.LogInformation("Recommendation already exists for consultation {ConsultationId}. Returning existing.", consultationId);
+                return MapToDto(existing);
+            }
+
             // Mock AI logic — placeholder for future OpenAI integration
             var recommendation = new Recommendation
             {
@@ -41,28 +49,28 @@ namespace ClinicConsultation.Application.Services
                 AiInsight = "AI suggests early-stage treatment",
                 Confidence = 0.87,
                 Treatments = new List<TreatmentOption>
-                {
-                    new TreatmentOption
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = "Standard Care",
-                        Description = "Basic treatment option",
-                        Priority = 1,
-                        EstimatedCostMin = 100,
-                        EstimatedCostMax = 200,
-                        Unit = "USD"
-                    },
-                    new TreatmentOption
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = "Advanced Care",
-                        Description = "Specialist treatment",
-                        Priority = 2,
-                        EstimatedCostMin = 300,
-                        EstimatedCostMax = 600,
-                        Unit = "USD"
-                    }
-                }
+        {
+            new TreatmentOption
+            {
+                Id = Guid.NewGuid(),
+                Name = "Standard Care",
+                Description = "Basic treatment option",
+                Priority = 1,
+                EstimatedCostMin = 100,
+                EstimatedCostMax = 200,
+                Unit = "USD"
+            },
+            new TreatmentOption
+            {
+                Id = Guid.NewGuid(),
+                Name = "Advanced Care",
+                Description = "Specialist treatment",
+                Priority = 2,
+                EstimatedCostMin = 300,
+                EstimatedCostMax = 600,
+                Unit = "USD"
+            }
+        }
             };
 
             await _recommendationRepository.AddAsync(recommendation);
